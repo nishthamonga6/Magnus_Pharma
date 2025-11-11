@@ -19,7 +19,7 @@
     "jsonwebtoken": "9.0.0",
   "lucide-react": "^0.268.0",
     "clsx": "1.2.1",
-    "nodemailer": "^6.9.4",
+  "nodemailer": "^7.0.10",
     "recharts": "^2.7.2"
   },
   "devDependencies": {
