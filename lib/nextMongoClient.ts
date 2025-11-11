@@ -89,6 +89,15 @@ if (!uri) {
     })
   }
 } else {
+  // If a URI is provided but it points to localhost/127.0.0.1, that's invalid
+  // for production deployments (they cannot reach your machine). Reject with
+  // a clear message so logs show the root cause instead of ECONNREFUSED.
+  if (process.env.NODE_ENV === 'production') {
+    const low = uri.toLowerCase()
+    if (low.includes('localhost') || low.includes('127.0.0.1') || low.includes('::1')) {
+      clientPromise = Promise.reject(new Error('MONGODB_URI points to localhost (127.0.0.1) which is not reachable from Vercel. Use MongoDB Atlas or a remote MongoDB instance and update the MONGODB_URI environment variable.'))
+    }
+  }
   if (process.env.NODE_ENV === 'development') {
     if (!global._mongoClientPromise) {
       client = new MongoClient(uri)
