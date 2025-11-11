@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #__next {
+  height: 100%;
+}
+
+body {
+  @apply bg-gray-100 text-slate-900 antialiased;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+.printable {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* card shadow close to screenshot */
+.shadow-sm { box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06); }
+
+/* Mobile sidebar drawer - toggled by adding `sidebar-open` class to <body> */
+.sidebar-mobile {
+  position: fixed;
+  left: -100%;
+  top: 0;
+  height: 100%;
+  width: 16rem; /* 64 */
+  z-index: 50;
+  transition: left 200ms ease;
+  background: #0b1220;
+}
+body.sidebar-open .sidebar-mobile { left: 0; }
+
+.sidebar-backdrop { display: none; }
+body.sidebar-open .sidebar-backdrop {
+  display: block;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 40;
+}
+
+/* Modal: full-screen on very small devices, centered on larger screens */
+.modal-mobile-full {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+}
+@media (min-width: 640px) {
+  .modal-mobile-full { width: auto; height: auto; border-radius: 0.5rem; }
+}
+
+.modal-content { max-height: 80vh; overflow: auto; }
+
